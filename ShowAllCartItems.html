@@ -1,0 +1,64 @@
+
+{%extends "master.html"%}
+{%block content%}
+<script type="text/javascript">
+    function decrement(id)
+    {
+        txt_qty =  document.getElementById(id);
+        if(txt_qty.value >1)
+        {           
+            txt_qty.value = txt_qty.value-1;
+        }
+        
+    }
+    function increment(id)
+    {
+        txt_qty =  document.getElementById(id);
+        if(parseInt(txt_qty.value) <10)
+        {           
+            txt_qty.value = parseInt(txt_qty.value)+1;
+        }
+    }
+   
+</script>
+<div class="container">
+    <h2 style="font-family:Times New Roman; font-size:40px;">Cart Items</h2>
+    
+<table class="table" style="font-family:Times New Roman; font-size:20px;">
+    <tr><th>Item Name</th><th>Item Price</th><th>Quantity</th>
+    <th>Update</th><th>Sub Total</th><th>Remove Items</th></tr>
+    {%for item in items%}
+    <form method="post">
+        {%csrf_token%}
+       <tr><td>{{item.food.item_name}}
+           <input type="hidden" name="food_id" value="{{item.food.id}}"/>
+       </td>
+        <td>{{item.food.price}}</td>
+    <td>
+            <button type="button" id="decre" class="btn btn-warning" 
+                    onclick="decrement('item_qty{{item.food.id}}');">-</button>
+            <input type="text" size="4" readonly id="item_qty{{item.food.id}}" 
+            value="{{item.qty}}" name="qty"/>
+            <button type="button" id="incr" class="btn btn-warning" 
+                onclick="increment('item_qty{{item.food.id}}');">+</button>
+    </td>
+    <td>
+        <button type="submit" name="action" class="btn btn-danger" value="update">Update</button>
+        
+    </td>
+    <td>{% widthratio item.food.price 1 item.qty %}</td>
+    <td>
+        <button type="submit" name="action" class="btn btn-danger" value="remove">Remove</button>
+    </td>
+</form>
+</tr>
+    {%endfor%}
+    
+</table>
+
+<hr/>
+<h3>Total  : {{request.session.total}}
+</h3>
+<a href="/MakePayment" class="btn btn-success">Proceed to Make Payment</a>
+</div>
+{%endblock%}

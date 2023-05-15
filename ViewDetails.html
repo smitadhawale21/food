@@ -1,0 +1,32 @@
+
+{%extends "master.html"%}
+{%block content%}
+<div class="container"  id="mydemo" style="font-family:Times New Roman; font-size:20px;">
+    <h2>Food Details</h2>
+    <form method="post" action="/AddToCart">
+        {%csrf_token%}
+<table class="table">
+    <tr><td>Item Id</td><td>{{food.id}}
+        <input type="hidden" name="food_id" value="{{food.id}}"/>
+    </td><td rowspan="6">
+        <img src="{{food.imageurl.url}}" class="img-circle" height="300px" width="300px"/>
+    </td></tr>
+    
+    <tr><td>Item Name</td><td>{{food.item_name}}</td></tr>
+    <tr><td>Item Price</td><td>{{food.price}}</td></tr>
+    <tr><td>Item Description</td><td>{{food.description}}</td></tr>
+    <tr><td>Category</td><td>{{food.category}}</td></tr>
+    <tr><td>Quantity</td>
+        <td><select name="qty" class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select></td></tr>
+        <tr><td><button type="submit" class="btn btn-success">
+            Add To Cart</button></td></tr>
+</table>
+</form>
+</div>
+{%endblock%}

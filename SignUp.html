@@ -1,0 +1,18 @@
+
+{%extends "master.html"%}
+{%block content%}
+<div class="container">
+    <h2 style="color:#8B008B;">Sign Up Please!!</h2>
+    <form method="post">
+        <div class="form-group">
+        {%csrf_token%}    
+<table class="table">
+    <tr><td>Enter Login Id</td><td><input class="form-control" type="text" name="uname"/></td></tr>
+    <tr><td>Enter Password</td><td><input class="form-control" type="text" name="pwd"/></td></tr>
+    <tr><td>Enter Email Id</td><td><input type="text" class="form-control" name="email"/></td></tr>    
+    <tr><td><button type="submit"  class="btn btn-success">Sign Up</button></td><td></td></tr>
+</table>
+</div>
+</form>
+</div>
+{%endblock%}
